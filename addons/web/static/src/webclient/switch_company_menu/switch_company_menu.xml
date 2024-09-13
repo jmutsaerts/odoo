@@ -15,7 +15,19 @@
             >
                 <button data-hotkey="shift+u" t-att-disabled="isSingleCompany" t-att-title="companyService.currentCompany.name">
                     <i class="fa fa-building d-lg-none"/>
-                    <span class="oe_topbar_name d-none d-lg-block text-truncate" t-esc="companyService.currentCompany.name"/>
+                    <!-- Get the number of selected companies -->
+                    <t t-set="selectedCompaniesCount" t-value="companySelector.selectedCompaniesIds.length"/>
+        
+                    <!-- Display the number of selected companies in a pill and the current company name -->
+                    <span class="oe_topbar_name d-none d-lg-block d-flex align-items-center">
+                        <!-- Pill design for the selected company count -->
+                        <span t-if="selectedCompaniesCount > 1" class="badge rounded-pill bg-primary custom-pill">
+                            <t t-esc="selectedCompaniesCount"/>
+                        </span>
+                        <span>
+                            <t t-esc="companyService.currentCompany.name"/>
+                        </span>
+                    </span>
                 </button>
 
                 <t t-set-slot="content">
